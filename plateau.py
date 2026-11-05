@@ -14,3 +14,6 @@ class Plateau:
             return(" ".join(ligne))
     def addCar(self, voiture):
         self.voitures.append(voiture)
+
+
+        
