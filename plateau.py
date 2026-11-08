@@ -1,4 +1,4 @@
-import Vehicule
+import vehicule
 
 class Plateau:
     def __init__(self):
@@ -13,8 +13,10 @@ class Plateau:
         self.voitures= []
         self.porte = (2, 5)
     def __str__(self):
+        affichage = ""
         for ligne in self.plateau:
-            return(" ".join(ligne))
+            affichage += " ".join(ligne) + "\n"
+        return affichage
     def addCar(self):
         self.voitures.append(voiture)
     def removeCar(self, voiture):
@@ -26,6 +28,3 @@ class Plateau:
                     return (x, y)
         return None
 #    def mouvementdecar(self, voiture, direction):
-
-
-
