@@ -15,7 +15,7 @@ class vehicule:
                 resultat.append((self.x + i, self.y))
         return resultat
 
-     def deplacer(self, direction):
+    def deplacer(self, direction):
         if self.orientation == "H":
             if direction == "D":
                 self.y += 1

@@ -3,7 +3,7 @@ from colorama import Fore, Style, init
 
 init(autoreset=True)
 class Plateau:
-    def __init__(self x,y):
+    def __init__(self):
         self.plateau = [
             [". ", ". ", ". ", ". ", ". ", ". "],
             [". ", "BV ", ". ", ". ", ". ", ". "],
@@ -14,7 +14,7 @@ class Plateau:
         ]
         self.voitures= []
         self.porte = (2, 6)
-        self.position_voiture(x,y)
+        #self.position_voiture(x,y)
     def __str__(self):
         nuancier = {
             "B": Fore.BLUE,
