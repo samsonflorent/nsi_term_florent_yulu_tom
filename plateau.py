@@ -41,9 +41,9 @@ class Plateau:
             affichage += " ".join(ligne_coloree) + "\n"
         return affichage
 
-    def addCar(self):
+        def ajtvoiture(self):
         self.voitures.append(voiture)
-    def removeCar(self, voiture):
+    def suppvoiture(self, voiture):
         self.voitures.remove(voiture)
     def position(self, voiture):
         for x in range(len(self.plateau)):
