@@ -15,5 +15,5 @@ class Vehicule:
                 resultat.append((self.x + i, self.y))
         return resultat
 
-    def repr(self):
+    def afficher(self):
         return f"Vehicule({self.taille}, {self.orientation}, {self.x}, {self.y})"
