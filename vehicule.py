@@ -17,15 +17,15 @@ class vehicule:
 
     def deplacer(self, direction):
         if self.orientation == "H":
-            if direction == "D":
+            if direction == "droit":
                 self.y += 1
-            elif direction == "G":
+            elif direction == "gauche":
                 self.y -= 1
 
         elif self.orientation == "V":
-            if direction == "H":
+            if direction == "haut":
                 self.x -= 1
-            elif direction == "B":
+            elif direction == "bas":
                 self.x += 1
 
     def afficher(self):
