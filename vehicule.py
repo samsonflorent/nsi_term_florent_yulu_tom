@@ -1,4 +1,4 @@
-class Vehicule:
+class vehicule:
 
     def __init__(self,taille,orientation,x,y):
         self.taille=taille
@@ -29,4 +29,4 @@ class Vehicule:
                 self.x += 1
 
     def afficher(self):
-        return f"Vehicule({self.taille}, {self.orientation}, {self.x}, {self.y})"
+        return f"vehicule({self.taille}, {self.orientation}, {self.x}, {self.y})"
