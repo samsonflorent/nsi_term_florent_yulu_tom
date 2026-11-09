@@ -3,7 +3,7 @@ from colorama import Fore, Style, init
 
 init(autoreset=True)
 class Plateau:
-    def __init__(self):
+    def __init__(self x,y):
         self.plateau = [
             [". ", ". ", ". ", ". ", ". ", ". "],
             [". ", "BV ", ". ", ". ", ". ", ". "],
@@ -13,7 +13,8 @@ class Plateau:
             [". ", ". ", ". ", ". ", ". ", ". "]
         ]
         self.voitures= []
-        self.porte = (2, 5)
+        self.porte = (2, 6)
+        self.position_voiture(x,y)
     def __str__(self):
         nuancier = {
             "B": Fore.BLUE,
@@ -51,3 +52,27 @@ class Plateau:
                     return (x, y)
         return None
 #    def mouvementdecar(self, voiture, direction):
+    def mouvementdevoiture(self, voiture, direction):
+        x, y = self.position(voiture)
+        if direction == " haut":
+             if y > 0 and self.plateau[x][y+1] == ". ":
+                self.plateau[x][y] = ". "
+                self.plateau[x][y+1]=voiture       
+        if direction == "bas":
+            if y > 0 and self.plateau[x][y-1] == ". ":
+                self.plateau[x][y] = ". "
+                self.plateau[x][y-1]=voiture    
+        if direction == "gauche":
+            if x > 0 and self.plateau[x-1][y] == ". ":
+                self.plateau[x][y] = ". "
+                self.plateau[x-1][y]=voiture    
+        if direction == "droite":
+            if x > 0 and self.plateau[x+1][y] == ". ":
+                self.plateau[x][y] = ". "
+                self.plateau[x+1][y]=voiture
+    def sortie(self,voiture):
+        x,y = self. position(voiture)
+        if (x,y) == self.porte:
+            self.suppvoiture(voiture)
+            print("bien joué vous avez passé le niveau !")
+
