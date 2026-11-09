@@ -1,58 +1,53 @@
 🚗 Rush Hour
 
-<p align="center">
-<strong>A classic puzzle game, reimagined.</strong>
-<br />
-A strategic challenge where every move counts!
-</p>
+<p align="center">A classic puzzle game, reimagined.</p>
 
-<p align="center">
-<img src="https://img.shields.io/badge/Project-Rush%20Hour-blue?style=for-the-badge&logo=github" />
-<img src="https://img.shields.io/badge/Status-In%20Development-orange?style=for-the-badge" />
-<img src="https://img.shields.io/badge/Game-Puzzle-purple?style=for-the-badge" />
-</p>
+!Project !Status !Genre
 
+Think smart. Move wisely. Escape the traffic!
 🎮 About the Project
 
-Rush Hour is an adaptation of the famous sliding-block puzzle game.
+Rush Hour is a modern adaptation of the famous sliding-block puzzle game.
 
-The goal is simple: help the red car escape the traffic jam by strategically moving the surrounding vehicles out of its way.
+Trapped in a crowded parking lot, your mission is simple: free the red car!
 
-Sounds easy? Think again! Every move matters, and finding the right sequence requires logic, patience, and strategic thinking.
+Move the surrounding vehicles, clear the path and guide the red car to the exit. But don't underestimate the challenge — every move counts!
 
-Whether you're a puzzle enthusiast or just looking for a fun challenge, Rush Hour puts your problem-solving skills to the test.
+Whether you're a puzzle enthusiast or simply looking for a fun mental challenge, Rush Hour will put your logic, patience and strategic thinking to the test.
 
 ✨ Features
-🚘 Classic Rush Hour gameplay – Enjoy the iconic traffic puzzle experience.
-🧠 Logical challenges – Plan your moves and find the perfect solution.
-🎯 Strategic gameplay – Every movement brings you closer to freedom.
-🚦 Traffic jam mechanics – Move vehicles while respecting their orientation and movement constraints.
+🚘 Classic Gameplay — Enjoy the iconic Rush Hour puzzle experience.
+🧠 Logical Challenges — Solve challenging traffic situations using logic and reasoning.
+🎯 Strategic Thinking — Plan your moves and find the most efficient solution.
+🚦 Traffic Mechanics — Move vehicles while respecting their orientation and movement constraints.
+🏆 Move Optimization — Challenge yourself to escape using as few moves as possible.
 🕹️ How to Play
-Start with a board filled with cars and trucks.
-Identify the red car, your main objective.
-Move vehicles forward or backward along their respective axes.
-Clear a path through the traffic.
-Get the red car to the exit and escape!
 
-Your mission: Free the red car using as few moves as possible!
+Your objective is simple: get the red car out of the traffic jam!
 
+🚗 Start with a board filled with cars and trucks.
+🔴 Identify the red car, your main objective.
+↔️ Move vehicles forward or backward along their respective axes.
+🧩 Clear the path by strategically rearranging the traffic.
+🏁 Guide the red car to the exit and escape!
+💡 Pro Tip: Think ahead! The shortest solution isn't always the most obvious one.
 🚀 Getting Started
 
-Clone the repository to get started:
+Want to try the project locally? Follow these steps.
 
+1. Clone the repository
 bash
 git clone <YOUR_REPOSITORY_URL>
 
-
-Navigate to the project directory:
-
+2. Navigate to the project directory
 bash
 cd <PROJECT_DIRECTORY>
 
+3. Install and run
 
 Follow the installation and execution instructions provided by the project.
 
-👥 Authors
+👥 Contributors
 
 Made with ❤️ by:
 
@@ -60,9 +55,10 @@ Contributor	GitHub
 Florent	@samsonflorent
 Yulu	@tuyulu-glitch
 Tom	@LeTomTomEnNsi
+🚦 The Challenge
 
-<p align="center">
-<strong>🚗 Think smart. Move wisely. Escape the traffic!</strong>
-<br />
-<sub>Rush Hour Project — Built with passion and logic.</sub>
-</p>
+Can you beat the traffic in the fewest moves possible?
+
+Every move matters. Every decision counts.
+
+Rush Hour — Built with passion, logic and creativity. ❤️
