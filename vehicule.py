@@ -17,7 +17,7 @@ class vehicule:
 
     def deplacer(self, direction):
         if self.orientation == "H":
-            if direction == "droit":
+            if direction == "droite":
                 self.y += 1
             elif direction == "gauche":
                 self.y -= 1
