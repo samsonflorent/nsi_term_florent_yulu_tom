@@ -5,9 +5,9 @@ init(autoreset=True)
 class Plateau:
     def __init__(self):
         self.plateau = [
-            [". ", ". ", ". ", ". ", ". ", ". "],
-            [". ", "BV ", "BV ", ". ", ". ", ". "],
-            [". ", "GV ", ". ", ". ", ". ", ". "],
+            [". ", ". ", ". ", ". ", ". ", "RC "],
+            [". ", "BV ", "BV ", ". ", ". ", "RC "],
+            [". ", "GV ", ". ", ". ", ". ", "RC "],
             [". ", "GV ", ". ", "VV ", ". ", ". "],
             [". ", ". ", ". ", "VV ", ". ", ". "],
             [". ", ". ", ". ", ". ", ". ", ". "]
@@ -75,4 +75,3 @@ class Plateau:
         if (x,y) == self.porte:
             self.suppvoiture(voiture)
             print("bien joué vous avez passé le niveau !")
-
