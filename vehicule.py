@@ -15,5 +15,18 @@ class Vehicule:
                 resultat.append((self.x + i, self.y))
         return resultat
 
+     def deplacer(self, direction):
+        if self.orientation == "H":
+            if direction == "D":
+                self.y += 1
+            elif direction == "G":
+                self.y -= 1
+
+        elif self.orientation == "V":
+            if direction == "H":
+                self.x -= 1
+            elif direction == "B":
+                self.x += 1
+
     def afficher(self):
         return f"Vehicule({self.taille}, {self.orientation}, {self.x}, {self.y})"
