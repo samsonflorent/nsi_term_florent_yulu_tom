@@ -3,13 +3,13 @@ from colorama import Fore, Style, init
 
 init(autoreset=True)
 class Plateau:
-    def __init__(self):
+    def __init__(self, x,y):
         self.plateau = [
-            [". ", ". ", ". ", ". ", ". ", "RC "],
-            [". ", "BV ", "BV ", ". ", ". ", "RC "],
-            [". ", "GV ", ". ", ". ", ". ", "RC "],
-            [". ", "GV ", ". ", "VV ", ". ", ". "],
+            [". ", ". ", ". ", ". ", ". ", ". "],
+            [". ", "BV ", ". ", ". ", ". ", ". "],
+            [". ", "GV ", ". ", ". ", ". ", ". "],
             [". ", ". ", ". ", "VV ", ". ", ". "],
+            [". ", ". ", ". ", ". ", ". ", ". "],
             [". ", ". ", ". ", ". ", ". ", ". "]
         ]
         self.voitures= []
@@ -49,13 +49,9 @@ class Plateau:
         self.voitures.append(voiture)
     def suppvoiture(self, voiture):
         self.voitures.remove(voiture)
-    def position(self, voiture):
-        for x in range(len(self.plateau)):
-            for y in range(len(self.plateau[x])):
-                if self.plateau[x][y] == voiture:
-                    return (x, y)
-        return None
-#    def mouvementdecar(self, voiture, direction):
+    def position_voiture(self, voiture):
+        for x, y in voiture.cases():
+            self.plateau[x][y] = voiture
     def mouvementdevoiture(self, voiture, direction):
         x, y = self.position(voiture)
         if direction == " haut":
