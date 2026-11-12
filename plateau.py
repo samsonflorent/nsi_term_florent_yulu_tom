@@ -14,6 +14,8 @@ class Plateau:
         ]
         self.voitures= []
         self.porte = (2, 6)
+        self.numero_niveau = 1
+        self.charger_niveau(self.numero_niveau)
         #self.position_voiture(x,y)
     def __str__(self):
         nuancier = {
@@ -40,8 +42,10 @@ class Plateau:
                 ligne_coloree.append(str_element)
             affichage += " ".join(ligne_coloree) + "\n"
         return affichage
-
-        def ajtvoiture(self):
+    def charger_niveau(self, numero):
+        module = __import__(f"niveau_{numero:02d}")
+        self.plateau = module.plateau
+    def ajtvoiture(self):
         self.voitures.append(voiture)
     def suppvoiture(self, voiture):
         self.voitures.remove(voiture)
