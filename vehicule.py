@@ -14,14 +14,14 @@ class vehicule:
         return resultat
     def deplacer(self, direction):
         if self.orientation == "H":
-            if direction == "droite":
+            if direction == "D":
                 self.y += 1
-            elif direction == "gauche":
+            elif direction == "G":
                 self.y -= 1
         elif self.orientation == "V":
-            if direction == "haut":
+            if direction == "H":
                 self.x -= 1
-            elif direction == "bas":
+            elif direction == "B":
                 self.x += 1
     def afficher(self):
         return f"vehicule({self.taille}, {self.orientation}, {self.x}, {self.y})"
