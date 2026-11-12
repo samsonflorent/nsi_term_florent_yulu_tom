@@ -43,7 +43,7 @@ class Plateau:
             affichage += " ".join(ligne_coloree) + "\n"
         return affichage
     def charger_niveau(self, numero):
-        module = __import__(f"niveau_{numero:02d}")
+        module = __import__(f"cartes.niveau_{numero:02d}", fromlist=["plateau"])
         self.plateau = module.plateau
     def ajtvoiture(self):
         self.voitures.append(voiture)
