@@ -19,13 +19,18 @@ class Plateau:
         #self.position_voiture(x,y)
     def __str__(self):
         nuancier = {
-            "B": Fore.BLUE,
-            "R": Fore.RED,
-            "V": Fore.GREEN,
-            "J": Fore.YELLOW,
-            "M": Fore.MAGENTA,
-            "C": Fore.CYAN,
-            "G": Fore.LIGHTBLACK_EX  # Gris
+            "R": Fore.RED,             # Rouge
+            "B": Fore.BLUE,            # Bleu
+            "V": Fore.GREEN,           # Vert
+            "J": Fore.YELLOW,          # Jaune
+            "M": Fore.MAGENTA,         # Magenta
+            "C": Fore.CYAN,            # Cyan
+            "G": Fore.LIGHTBLACK_EX,   # Gris
+            "O": Fore.LIGHTRED_EX,     # Orange (approximatif)
+            "P": Fore.LIGHTMAGENTA_EX, # Rose
+            "L": Fore.LIGHTBLUE_EX,    # Bleu clair
+            "T": Fore.LIGHTGREEN_EX,   # Vert clair
+            "W": Fore.WHITE            # Blanc
         }
         affichage = ""
         for ligne in self.plateau:
