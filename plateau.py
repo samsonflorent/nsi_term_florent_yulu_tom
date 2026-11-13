@@ -6,9 +6,9 @@ class Plateau:
     def __init__(self, x,y):
         self.plateau = [
             [". ", ". ", ". ", ". ", ". ", ". "],
-            [". ", "BV ", ". ", ". ", ". ", ". "],
-            [". ", "GV ", ". ", ". ", ". ", ". "],
-            [". ", ". ", ". ", "VV ", ". ", ". "],
+            [". ", ". ", ". ", ". ", ". ", ". "],
+            [". ", ". ", ". ", ". ", ". ", ". "],
+            [". ", ". ", ". ", ". ", ". ", ". "],
             [". ", ". ", ". ", ". ", ". ", ". "],
             [". ", ". ", ". ", ". ", ". ", ". "]
         ]
@@ -50,16 +50,19 @@ class Plateau:
     def charger_niveau(self, numero):
         module = __import__(f"cartes.niveau_{numero:02d}", fromlist=["plateau"])
         self.plateau = module.plateau
-    def ajtvoiture(self):
+    def ajtvoiture(self,voiture):
         self.voitures.append(voiture)
     def suppvoiture(self, voiture):
         self.voitures.remove(voiture)
-    def position_voiture(self, voiture):
-        for x, y in voiture.cases():
-            self.plateau[x][y] = voiture
+    def position(self, voiture):
+        for x in range(len(self.plateau)):
+            for y in range(len(self.plateau[x])):
+                if self.plateau[x][y] == voiture:
+                    return (x, y)
+        return None
     def mouvementdevoiture(self, voiture, direction):
         x, y = self.position(voiture)
-        if direction == " haut":
+        if direction == "haut":
              if y > 0 and self.plateau[x][y+1] == ". ":
                 self.plateau[x][y] = ". "
                 self.plateau[x][y+1]=voiture       
@@ -72,7 +75,7 @@ class Plateau:
                 self.plateau[x][y] = ". "
                 self.plateau[x-1][y]=voiture    
         if direction == "droite":
-            if x > 0 and self.plateau[x+1][y] == ". ":
+            if x+1 < 6 and self.plateau[x+1][y] == ". ":
                 self.plateau[x][y] = ". "
                 self.plateau[x+1][y]=voiture
     def sortie(self,voiture):
@@ -80,3 +83,4 @@ class Plateau:
         if (x,y) == self.porte:
             self.suppvoiture(voiture)
             print("bien joué vous avez passé le niveau !")
+
