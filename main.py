@@ -10,3 +10,6 @@ print(V1.cases())
 V1.deplacer("")
 print(V1.afficher())
 print(V1.cases())
+
+while plateau.getState() != "w":
+    if 

@@ -2,8 +2,10 @@ import vehicule
 from colorama import Fore, Style, init
 
 init(autoreset=True)
+
+
 class Plateau:
-    def __init__(self, x,y):
+    def __init__(self):
         self.plateau = [
             [". ", ". ", ". ", ". ", ". ", ". "],
             [". ", ". ", ". ", ". ", ". ", ". "],
@@ -78,9 +80,12 @@ class Plateau:
             if x+1 < 6 and self.plateau[x+1][y] == ". ":
                 self.plateau[x][y] = ". "
                 self.plateau[x+1][y]=voiture
+    def getState(self):
+        return self.state
     def sortie(self,voiture):
         x,y = self. position(voiture)
         if (x,y) == self.porte:
             self.suppvoiture(voiture)
             print("bien joué vous avez passé le niveau !")
+            self.state = "w"
 
