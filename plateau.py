@@ -1,4 +1,4 @@
-import vehicule
+from vehicule import Vehicule
 from colorama import Fore, Style, init
 
 init(autoreset=True)
@@ -52,16 +52,19 @@ class Plateau:
     def charger_niveau(self, numero):
         module = __import__(f"cartes.niveau_{numero:02d}", fromlist=["plateau"])
         self.plateau = module.plateau
-    def ajtvoiture(self,voiture):
+    
+    def ajtvoiture(self, voiture):
         self.voitures.append(voiture)
+        self.actualiser_plateau()
+
     def suppvoiture(self, voiture):
-        self.voitures.remove(voiture)
+        if voiture in self.voitures:
+            self.voitures.remove(voiture)
+            self.actualiser_plateau()
+
     def position(self, voiture):
-        for x in range(len(self.plateau)):
-            for y in range(len(self.plateau[x])):
-                if self.plateau[x][y] == voiture:
-                    return (x, y)
-        return None
+        return (voiture.x, voiture.y)
+
     def mouvementdevoiture(self, voiture, direction):
         x, y = self.position(voiture)
         if direction == "haut":
@@ -80,6 +83,7 @@ class Plateau:
             if x+1 < 6 and self.plateau[x+1][y] == ". ":
                 self.plateau[x][y] = ". "
                 self.plateau[x+1][y]=voiture
+                
     def getState(self):
         return self.state
     def sortie(self,voiture):
@@ -88,4 +92,18 @@ class Plateau:
             self.suppvoiture(voiture)
             print("bien joué vous avez passé le niveau !")
             self.state = "w"
+    def actualiser_plateau(self):
+        """Reconstruit le plateau à partir des voitures."""
 
+        # On vide le plateau
+        self.plateau = [
+            [". " for _ in range(6)]
+            for _ in range(6)
+        ]
+
+        # On replace toutes les voitures
+        for voiture in self.voitures:
+            for x, y in voiture.cases():
+
+                if 0 <= x < 6 and 0 <= y < 6:
+                    self.plateau[x][y] = voiture
