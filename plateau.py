@@ -52,10 +52,11 @@ class Plateau:
     def charger_niveau(self, numero):
         module = __import__(
             f"cartes.niveau_{numero:02d}",
-            fromlist=["plateau", "voitures"]
+            fromlist=["plateau"]
         )
-        self.voitures = module.voitures
-        self.actualiser_plateau()
+
+        self.plateau = module.plateau
+        self.convertir_en_voitures()
     
     def ajtvoiture(self, voiture):
         self.voitures.append(voiture)
@@ -111,3 +112,41 @@ class Plateau:
 
                 if 0 <= x < 6 and 0 <= y < 6:
                     self.plateau[x][y] = voiture
+    def convertir_en_voitures(self):
+        self.voitures = []
+        voitures_trouvees = {}
+    
+        for x in range(6):
+            for y in range(6):
+                case = self.plateau[x][y]
+    
+                if case != ". ":
+                    couleur = case[:2]
+    
+                    if couleur not in voitures_trouvees:
+                        voitures_trouvees[couleur] = []
+    
+                    voitures_trouvees[couleur].append((x, y))
+    
+        for couleur, positions in voitures_trouvees.items():
+        
+            # On détermine l'orientation
+            if len(positions) == 1:
+                orientation = "H"  # À adapter si une voiture de taille 1 existe
+            elif all(p[0] == positions[0][0] for p in positions):
+                orientation = "H"
+            else:
+                orientation = "V"
+    
+            x = min(p[0] for p in positions)
+            y = min(p[1] for p in positions)
+    
+            voiture = Vehicule(
+                len(positions),
+                orientation,
+                x,
+                y,
+                couleur
+            )
+    
+            self.voitures.append(voiture)
