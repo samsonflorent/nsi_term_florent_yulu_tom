@@ -50,8 +50,12 @@ class Plateau:
             affichage += " ".join(ligne_coloree) + "\n"
         return affichage
     def charger_niveau(self, numero):
-        module = __import__(f"cartes.niveau_{numero:02d}", fromlist=["plateau"])
-        self.plateau = module.plateau
+        module = __import__(
+            f"cartes.niveau_{numero:02d}",
+            fromlist=["plateau", "voitures"]
+        )
+        self.voitures = module.voitures
+        self.actualiser_plateau()
     
     def ajtvoiture(self, voiture):
         self.voitures.append(voiture)
@@ -83,7 +87,7 @@ class Plateau:
             if x+1 < 6 and self.plateau[x+1][y] == ". ":
                 self.plateau[x][y] = ". "
                 self.plateau[x+1][y]=voiture
-                
+
     def getState(self):
         return self.state
     def sortie(self,voiture):
