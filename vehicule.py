@@ -1,10 +1,11 @@
 
 class Vehicule:
-    def __init__(self, taille, orientation, x, y):
+    def __init__(self, taille, orientation, x, y, couleur):
         self.taille = taille
         self.orientation = orientation
         self.x = x
         self.y = y
+        self.couleur = couleur
 
     def cases(self):
         """Renvoie toutes les coordonnées occupées par la voiture."""
