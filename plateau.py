@@ -7,18 +7,29 @@ init(autoreset=True)
 class Plateau:
     def __init__(self):
         self.plateau = [
-            [". ", ". ", ". ", ". ", ". ", ". "],
-            [". ", ". ", ". ", ". ", ". ", ". "],
-            [". ", ". ", ". ", ". ", ". ", ". "],
-            [". ", ". ", ". ", ". ", ". ", ". "],
-            [". ", ". ", ". ", ". ", ". ", ". "],
-            [". ", ". ", ". ", ". ", ". ", ". "]
+            [". " for _ in range(6)]
+            for _ in range(6)
         ]
-        self.voitures= []
+
+        self.voitures = []
         self.porte = (2, 6)
-        self.numero_niveau = 1
+        self.state = "p"
+
+        # Choix du niveau
+        while True:
+            try:
+                numero = int(input("Choisissez un niveau : "))
+
+                if 1 <= numero <= 99:
+                    self.numero_niveau = numero
+                    break
+                else:
+                    print("Veuillez choisir un niveau entre 1 et 99.")
+
+            except ValueError:
+                print("Veuillez entrer un nombre valide.")
         self.charger_niveau(self.numero_niveau)
-        #self.position_voiture(x,y)
+        
     def __str__(self):
         nuancier = {
             "R": Fore.RED,             # Rouge
@@ -50,14 +61,18 @@ class Plateau:
             affichage += " ".join(ligne_coloree) + "\n"
         return affichage
     def charger_niveau(self, numero):
-        module = __import__(
-            f"cartes.niveau_{numero:02d}",
-            fromlist=["plateau"]
-        )
+        try:
+            module = __import__(
+                f"cartes.niveau_{numero:02d}",
+                fromlist=["plateau"]
+            )
+            self.plateau = module.plateau
+            self.convertir_en_voitures()
 
-        self.plateau = module.plateau
-        self.convertir_en_voitures()
-    
+        except ModuleNotFoundError:
+            print("Ce niveau n'existe pas.")
+            raise
+
     def ajtvoiture(self, voiture):
         self.voitures.append(voiture)
         self.actualiser_plateau()
