@@ -12,7 +12,7 @@ class Plateau:
         ]
 
         self.voitures = []
-        self.porte = (2, 6)
+        self.porte = (2, 5)
         self.state = "p"
 
         # Choix du niveau
@@ -60,18 +60,6 @@ class Plateau:
                 ligne_coloree.append(str_element)
             affichage += " ".join(ligne_coloree) + "\n"
         return affichage
-    def charger_niveau(self, numero):
-        try:
-            module = __import__(
-                f"cartes.niveau_{numero:02d}",
-                fromlist=["plateau"]
-            )
-            self.plateau = module.plateau
-            self.convertir_en_voitures()
-
-        except ModuleNotFoundError:
-            print("Ce niveau n'existe pas.")
-            raise
 
     def ajtvoiture(self, voiture):
         self.voitures.append(voiture)
