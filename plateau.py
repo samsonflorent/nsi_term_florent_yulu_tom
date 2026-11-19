@@ -7,8 +7,8 @@ init(autoreset=True)
 class Plateau:
     def __init__(self, plateau):
         self.plateau = plateau
-        self.convertir_en_voitures()
         self.voitures = []
+        self.convertir_en_voitures()
         self.porte = (2, 5)
         self.state = "p"
         
@@ -55,60 +55,59 @@ class Plateau:
     def position(self, voiture):
         return (voiture.x, voiture.y)
 
-    
-def mouvementdevoiture(self, voiture, direction):
+    def mouvementdevoiture(self, voiture, direction):
 
-    # Vérifier que la direction correspond à l'orientation
-    if voiture.orientation == "H" and direction not in ["gauche", "droite"]:
-        print("Cette voiture est horizontale !")
-        return
-
-    if voiture.orientation == "V" and direction not in ["haut", "bas"]:
-        print("Cette voiture est verticale !")
-        return
-
-    # Calculer les nouvelles positions sans déplacer immédiatement
-    dx = 0
-    dy = 0
-
-    if direction == "haut":
-        dx = -1
-    elif direction == "bas":
-        dx = 1
-    elif direction == "gauche":
-        dy = -1
-    elif direction == "droite":
-        dy = 1
-    else:
-        print("Direction invalide.")
-        return
-
-    nouvelles_cases = [
-        (x + dx, y + dy)
-        for x, y in voiture.cases()
-    ]
-
-    anciennes_cases = set(voiture.cases())
-
-    # Vérifier les obstacles et les limites
-    for x, y in nouvelles_cases:
-
-        if not (0 <= x < 6 and 0 <= y < 6):
-            print("Déplacement impossible : limite du plateau.")
+        # Vérifier que la direction correspond à l'orientation
+        if voiture.orientation == "H" and direction not in ["gauche", "droite"]:
+            print("Cette voiture est horizontale !")
             return
 
-        if self.plateau[x][y] != ". " and (x, y) not in anciennes_cases:
-            print("Déplacement impossible : voiture bloquée.")
+        if voiture.orientation == "V" and direction not in ["haut", "bas"]:
+            print("Cette voiture est verticale !")
             return
 
-    # Effectuer le déplacement
-    voiture.x += dx
-    voiture.y += dy
+        # Calculer les nouvelles positions sans déplacer immédiatement
+        dx = 0
+        dy = 0
 
-    # Actualiser le plateau
-    self.actualiser_plateau()
+        if direction == "haut":
+            dx = -1
+        elif direction == "bas":
+            dx = 1
+        elif direction == "gauche":
+            dy = -1
+        elif direction == "droite":
+            dy = 1
+        else:
+            print("Direction invalide.")
+            return
 
-    print("Déplacement effectué !")
+        nouvelles_cases = [
+            (x + dx, y + dy)
+            for x, y in voiture.cases()
+        ]
+
+        anciennes_cases = set(voiture.cases())
+
+        # Vérifier les obstacles et les limites
+        for x, y in nouvelles_cases:
+
+            if not (0 <= x < 6 and 0 <= y < 6):
+                print("Déplacement impossible : limite du plateau.")
+                return
+
+            if self.plateau[x][y] != ". " and (x, y) not in anciennes_cases:
+                print("Déplacement impossible : voiture bloquée.")
+                return
+
+        # Effectuer le déplacement
+        voiture.x += dx
+        voiture.y += dy
+
+        # Actualiser le plateau
+        self.actualiser_plateau()
+
+        print("Déplacement effectué !")
 
 
     def getState(self):
@@ -135,42 +134,64 @@ def mouvementdevoiture(self, voiture, direction):
 
                 if 0 <= x < 6 and 0 <= y < 6:
                     self.plateau[x][y] = voiture
+    
+    
     def convertir_en_voitures(self):
         self.voitures = []
         voitures_trouvees = {}
-    
+
         for x in range(6):
             for y in range(6):
-                case = self.plateau[x][y]
-    
-                if case != ". ":
-                    couleur = case[:2]
-    
-                    if couleur not in voitures_trouvees:
-                        voitures_trouvees[couleur] = []
-    
-                    voitures_trouvees[couleur].append((x, y))
-    
-        for couleur, positions in voitures_trouvees.items():
-        
-            # On détermine l'orientation
-            if len(positions) == 1:
-                orientation = "H"  # À adapter si une voiture de taille 1 existe
-            elif all(p[0] == positions[0][0] for p in positions):
+                case = str(self.plateau[x][y]).strip()
+
+                if case and case != ".":
+                    code = case[:2]
+
+                    if code not in voitures_trouvees:
+                        voitures_trouvees[code] = []
+
+                    voitures_trouvees[code].append((x, y))
+
+        for code, positions in voitures_trouvees.items():
+
+            lignes = {pos[0] for pos in positions}
+            colonnes = {pos[1] for pos in positions}
+
+            if len(lignes) == 1:
                 orientation = "H"
-            else:
+                x = positions[0][0]
+                y = min(pos[1] for pos in positions)
+
+            elif len(colonnes) == 1:
                 orientation = "V"
-    
-            x = min(p[0] for p in positions)
-            y = min(p[1] for p in positions)
-    
+                x = min(pos[0] for pos in positions)
+                y = positions[0][1]
+
+            else:
+                raise ValueError(
+                    f"Véhicule {code} mal placé : {positions}"
+                )
+
+            # La deuxième lettre détermine la catégorie
+            if code[1] == "C":
+                longueur = 3
+            elif code[1] == "V":
+                longueur = 2
+            else:
+                raise ValueError(f"Catégorie inconnue : {code}")
+
+            if len(positions) != longueur:
+                raise ValueError(
+                    f"{code} devrait occuper {longueur} cases, "
+                    f"mais en occupe {len(positions)}"
+                )
+
             voiture = Vehicule(
-                len(positions),
+                longueur,
                 orientation,
                 x,
                 y,
-                couleur
+                code
             )
-    
+
             self.voitures.append(voiture)
-            

@@ -27,7 +27,7 @@ def main():
 
         if choice == "1":
             charger_niveau(1)
-            display_game()
+            display_game(p)
             input("Appuyez sur Entrée pour revenir...")
         elif choice == "2":
             print("Sélection du niveau")
