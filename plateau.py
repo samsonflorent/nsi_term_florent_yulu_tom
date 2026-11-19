@@ -43,21 +43,20 @@ class Plateau:
             affichage += " ".join(ligne_coloree) + "\n"
         return affichage
 
-    def ajtvoiture(self, voiture):
+    def ajtvoiture(self, voiture):                                 #ajouté une voiture
         self.voitures.append(voiture)
         self.actualiser_plateau()
 
-    def suppvoiture(self, voiture):
+    def suppvoiture(self, voiture):                                #supprimé la voiture
         if voiture in self.voitures:
             self.voitures.remove(voiture)
             self.actualiser_plateau()
 
-    def position(self, voiture):
+    def position(self, voiture):                                    #get la position de la voiture
         return (voiture.x, voiture.y)
 
     def mouvementdevoiture(self, voiture, direction):
-
-        # Vérifier que la direction correspond à l'orientation
+                                                                    # Vérifier que la direction correspond à l'orientation
         if voiture.orientation == "H" and direction not in ["gauche", "droite"]:
             print("Cette voiture est horizontale !")
             return
@@ -65,33 +64,28 @@ class Plateau:
         if voiture.orientation == "V" and direction not in ["haut", "bas"]:
             print("Cette voiture est verticale !")
             return
-
-        # Calculer les nouvelles positions sans déplacer immédiatement
+                                                                    # Calculer les nouvelles positions sans déplacer immédiatement
         dx = 0
         dy = 0
-
-        if direction == "haut":
+        if direction == "haut":                                     #haut
             dx = -1
-        elif direction == "bas":
+        elif direction == "bas":                                    #bas
             dx = 1
-        elif direction == "gauche":
+        elif direction == "gauche":                                 #gauche
             dy = -1
-        elif direction == "droite":
+        elif direction == "droite":                                 #droite
             dy = 1
         else:
-            print("Direction invalide.")
+            print("Direction invalide.")                            #pour l erreur
             return
 
         nouvelles_cases = [
             (x + dx, y + dy)
             for x, y in voiture.cases()
         ]
-
-        anciennes_cases = set(voiture.cases())
-
-        # Vérifier les obstacles et les limites
+        anciennes_cases = set(voiture.cases())                      # crée une collection non ordonnée
+                                                                                            # Vérifier les obstacles et les limites
         for x, y in nouvelles_cases:
-
             if not (0 <= x < 6 and 0 <= y < 6):
                 print("Déplacement impossible : limite du plateau.")
                 return
