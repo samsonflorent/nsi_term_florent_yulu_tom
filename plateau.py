@@ -5,30 +5,12 @@ init(autoreset=True)
 
 
 class Plateau:
-    def __init__(self):
-        self.plateau = [
-            [". " for _ in range(6)]
-            for _ in range(6)
-        ]
-
+    def __init__(self, plateau):
+        self.plateau = plateau
+        self.convertir_en_voitures()
         self.voitures = []
-        self.porte = (2, 5)
+        self.porte = (2, 6)
         self.state = "p"
-
-        # Choix du niveau
-        while True:
-            try:
-                numero = int(input("Choisissez un niveau : "))
-
-                if 1 <= numero <= 99:
-                    self.numero_niveau = numero
-                    break
-                else:
-                    print("Veuillez choisir un niveau entre 1 et 99.")
-
-            except ValueError:
-                print("Veuillez entrer un nombre valide.")
-        self.charger_niveau(self.numero_niveau)
         
     def __str__(self):
         nuancier = {
@@ -191,3 +173,4 @@ def mouvementdevoiture(self, voiture, direction):
             )
     
             self.voitures.append(voiture)
+            
