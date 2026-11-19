@@ -132,6 +132,7 @@ def mouvementdevoiture(self, voiture, direction):
     def getState(self):
         return self.state
     def sortie(self,voiture):
+        # c est la sortie pour la fin
         x,y = self. position(voiture)
         if (x,y) == self.porte:
             self.suppvoiture(voiture)
