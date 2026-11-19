@@ -20,7 +20,7 @@ class Vehicule:
         return resultat
         
     def deplacer(self, direction):
-    """Déplace la voiture d'une case."""
+        """Déplace la voiture d'une case."""
         
         if self.orientation == "H":
             if direction == "droite":
