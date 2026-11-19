@@ -18,26 +18,26 @@ class Vehicule:
                 resultat.append((self.x + i, self.y))
 
         return resultat
-
+        
     def deplacer(self, direction):
-        """Déplace la voiture d'une case."""
-
+    """Déplace la voiture d'une case."""
+        
         if self.orientation == "H":
-            if direction == "D":
+            if direction == "droite":
                 self.y += 1
-            elif direction == "G":
+            elif direction == "gauche":
                 self.y -= 1
             else:
                 return False
-
+        
         elif self.orientation == "V":
-            if direction == "B":
+            if direction == "bas":
                 self.x += 1
-            elif direction == "H":
+            elif direction == "haut":
                 self.x -= 1
             else:
                 return False
-
+        
         return True
 
     def afficher(self):
