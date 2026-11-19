@@ -9,7 +9,7 @@ class Plateau:
         self.plateau = plateau
         self.convertir_en_voitures()
         self.voitures = []
-        self.porte = (2, 6)
+        self.porte = (2, 5)
         self.state = "p"
         
     def __str__(self):
