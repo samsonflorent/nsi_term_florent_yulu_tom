@@ -73,24 +73,61 @@ class Plateau:
     def position(self, voiture):
         return (voiture.x, voiture.y)
 
-    def mouvementdevoiture(self, voiture, direction):
-        x, y = self.position(voiture)
-        if direction == "haut":
-             if y > 0 and self.plateau[x][y+1] == ". ":
-                self.plateau[x][y] = ". "
-                self.plateau[x][y+1]=voiture       
-        if direction == "bas":
-            if y > 0 and self.plateau[x][y-1] == ". ":
-                self.plateau[x][y] = ". "
-                self.plateau[x][y-1]=voiture    
-        if direction == "gauche":
-            if x > 0 and self.plateau[x-1][y] == ". ":
-                self.plateau[x][y] = ". "
-                self.plateau[x-1][y]=voiture    
-        if direction == "droite":
-            if x+1 < 6 and self.plateau[x+1][y] == ". ":
-                self.plateau[x][y] = ". "
-                self.plateau[x+1][y]=voiture
+    
+def mouvementdevoiture(self, voiture, direction):
+
+    # Vérifier que la direction correspond à l'orientation
+    if voiture.orientation == "H" and direction not in ["gauche", "droite"]:
+        print("Cette voiture est horizontale !")
+        return
+
+    if voiture.orientation == "V" and direction not in ["haut", "bas"]:
+        print("Cette voiture est verticale !")
+        return
+
+    # Calculer les nouvelles positions sans déplacer immédiatement
+    dx = 0
+    dy = 0
+
+    if direction == "haut":
+        dx = -1
+    elif direction == "bas":
+        dx = 1
+    elif direction == "gauche":
+        dy = -1
+    elif direction == "droite":
+        dy = 1
+    else:
+        print("Direction invalide.")
+        return
+
+    nouvelles_cases = [
+        (x + dx, y + dy)
+        for x, y in voiture.cases()
+    ]
+
+    anciennes_cases = set(voiture.cases())
+
+    # Vérifier les obstacles et les limites
+    for x, y in nouvelles_cases:
+
+        if not (0 <= x < 6 and 0 <= y < 6):
+            print("Déplacement impossible : limite du plateau.")
+            return
+
+        if self.plateau[x][y] != ". " and (x, y) not in anciennes_cases:
+            print("Déplacement impossible : voiture bloquée.")
+            return
+
+    # Effectuer le déplacement
+    voiture.x += dx
+    voiture.y += dy
+
+    # Actualiser le plateau
+    self.actualiser_plateau()
+
+    print("Déplacement effectué !")
+
 
     def getState(self):
         return self.state
