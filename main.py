@@ -20,7 +20,7 @@ def display_menu():
 def play_game(p):
     s = True
     while s == True:
-        print(p)
+        print(f"\n{p}")
         userCarChoiceInput = input("Quelle vehicule voulez vous sélectionner (v : voiture, c : camion) : ").lower()
         if userCarChoiceInput not in ["v", "c"]:
             print("Type de véhicule invalide.")
@@ -50,7 +50,6 @@ def play_game(p):
             print("Aucun véhicule correspondant trouvé.")
             continue
 
-        print("Véhicule sélectionné :")
         print(vehicule_selectionne.afficher())
 
         direction = input(
