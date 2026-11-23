@@ -1,0 +1,128 @@
+import tkinter as tk
+
+fenetre = tk.Tk()
+fenetre.title("Rush Hour")
+fenetre.geometry("800x800")
+fenetre.config(background="#202B3C")
+
+
+titre = tk.Label(
+    fenetre,
+    text="🚘 RUSH HOUR",
+    font=("Arial", 34, "bold"),
+    bg="#202B3C",
+    fg="white"
+)
+titre.place(relx=0.5, y=100, anchor="center")
+
+label = tk.Label(
+    fenetre,
+    text="Le défi ultime des embouteillages !",
+    font=("Arial", 15, "italic"),
+    bg="#202B3C",
+    fg="#FFD166"
+)
+label.place(relx=0.5, y=155, anchor="center")
+
+
+def bouton_jouer():
+    print("Jouer")
+
+def bouton_niveau():
+
+    nouvelle_fenetre = tk.Toplevel(fenetre)
+    nouvelle_fenetre.title("Choisir un niveau")
+    nouvelle_fenetre.geometry("600x600")
+    nouvelle_fenetre.config(bg="#202B3C")
+
+    titre = tk.Label(
+        nouvelle_fenetre,
+        text="CHOISIS TON NIVEAU",
+        font=("Arial", 24, "bold"),
+        bg="#202B3C",
+        fg="white"
+    )
+    titre.pack(pady=20)
+
+
+    cadre = tk.Frame(nouvelle_fenetre, bg="#202B3C")
+    cadre.pack(pady=10)
+
+    def choisir(n):
+        print("Tu as choisi le niveau", n)
+
+        resultat.config(
+            text="Niveau " + str(n) + " sélectionné !"
+        )
+
+    for i in range(1, 41):
+
+        bouton = tk.Button(
+            cadre,
+            text=str(i),
+            font=("Arial", 14, "bold"),
+            bg="#FFD166",
+            fg="black",
+            width=7,
+            height=2,
+            command=lambda n=i: choisir(n)
+        )
+
+        bouton.grid(
+            row=(i-1)//5,
+            column=(i-1)%5,
+            padx=6,
+            pady=6
+        )
+
+    resultat = tk.Label(
+        nouvelle_fenetre,
+        text="Aucun niveau sélectionné",
+        font=("Arial", 14, "bold"),
+        bg="#202B3C",
+        fg="#06D6A0"
+    )
+    resultat.pack(pady=20)
+
+
+
+def bouton_quitter():
+    fenetre.destroy()
+
+
+
+bouton = tk.Button(
+    fenetre,
+    text="▶ JOUER",
+    command=bouton_jouer,
+    bg="#FFD166",
+    fg="black",
+    font=("Arial", 12, "bold"),
+    width=20
+)
+bouton.place(x=300, y=300)
+
+niveau = tk.Button(
+    fenetre,
+    text="⚙ NIVEAU",
+    command=bouton_niveau,
+    bg="#FFD166",
+    fg="black",
+    font=("Arial", 12, "bold"),
+    width=20
+)
+niveau.place(x=300, y=400)
+
+quitter = tk.Button(
+    fenetre,
+    text="✖ QUITTER",
+    command=bouton_quitter,
+    bg="#FFD166",
+    fg="black",
+    font=("Arial", 12, "bold"),
+    width=20
+)
+quitter.place(x=300, y=500)
+
+
+fenetre.mainloop()
