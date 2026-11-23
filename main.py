@@ -17,28 +17,86 @@ def display_menu():
 ╚══════════════════════════════════════╝
 """)
 
-def display_game(p):
-    print(p)
+def play_game(p):
+    s = True
+    while s == True:
+        print(p)
+        userCarChoiceInput = input("Quelle vehicule voulez vous sélectionner (v : voiture, c : camion) : ").lower()
+        if userCarChoiceInput not in ["v", "c"]:
+            print("Type de véhicule invalide.")
+            continue
+        userColorChoiceInput = input("De quelle couleur est votre vehicule (Rouge : R, Bleu : B, Jaune : J, Orange : O, ... et ainsi de suite, ? : liste des caractères/couleurs ) : ").upper()
+        if userColorChoiceInput == "?":
+            print("R -> Rouge \nB->Bleu \nV->Vert \nJ->Jaune \nM->Magenta \nC->Cyan \nG->Gris \nO->Orange \nP->Rose")
+            continue
+        vehicule_selectionne = None
+
+        for voiture in p.voitures:
+
+            # On vérifie la couleur
+            if voiture.couleur[0] != userColorChoiceInput:
+                continue
+
+            # On vérifie le type
+            if userCarChoiceInput == "v" and voiture.taille == 2:
+                vehicule_selectionne = voiture
+                break
+
+            elif userCarChoiceInput == "c" and voiture.taille == 3:
+                vehicule_selectionne = voiture
+                break
+
+        if vehicule_selectionne is None:
+            print("Aucun véhicule correspondant trouvé.")
+            continue
+
+        print("Véhicule sélectionné :")
+        print(vehicule_selectionne.afficher())
+
+        direction = input(
+            "Dans quelle direction voulez-vous le déplacer "
+            "(haut, bas, gauche, droite) ? "
+        ).lower()
+
+        directions = {
+            "droite": "D",
+            "gauche": "G",
+            "bas": "B",
+            "haut": "H"
+        }
+
+        if direction not in directions:
+            print("Direction invalide.")
+            continue
+
+        if p.mouvementdevoiture(
+            vehicule_selectionne,
+            directions[direction]
+        ):
+            print("Déplacement réussi !")
+        else:
+            print("Déplacement impossible !")
 
 def main():
     while True:
         display_menu()
         choice = input("Votre choix : ")
-
         if choice == "1":
-            charger_niveau(1)
-            display_game(p)
-            input("Appuyez sur Entrée pour revenir...")
+            p = charger_niveau(1)
+            if p is not None:
+                play_game(p)
+                input("Appuyez sur Entrée pour revenir...")
         elif choice == "2":
             print("Sélection du niveau")
             n = int(input("Quel niveau voulez-vous : "))
             p = charger_niveau(n)
             if p is not None:
-                display_game(p)
+                play_game(p)
         elif choice == "3":
             print("Déplacez les véhicules pour libérer X.")
         elif choice == "4":
             print("Au revoir !")
+            break
         else:
             print("Choix invalide.")
 

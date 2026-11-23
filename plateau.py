@@ -38,7 +38,7 @@ class Plateau:
                     symbole = case[1]
                     str_element = f"{couleur}{symbole}{Style.RESET_ALL} "
                 else:
-                    str_element = element
+                    str_element = case
                 ligne_coloree.append(str_element)
             affichage += " ".join(ligne_coloree) + "\n"
         return affichage
@@ -55,54 +55,39 @@ class Plateau:
     def position(self, voiture):                                    #get la position de la voiture
         return (voiture.x, voiture.y)
 
+    
     def mouvementdevoiture(self, voiture, direction):
-                                                                    # Vérifier que la direction correspond à l'orientation
-        if voiture.orientation == "H" and direction not in ["gauche", "droite"]:
-            print("Cette voiture est horizontale !")
-            return
 
-        if voiture.orientation == "V" and direction not in ["haut", "bas"]:
-            print("Cette voiture est verticale !")
-            return
-                                                                    # Calculer les nouvelles positions sans déplacer immédiatement
-        dx = 0
-        dy = 0
-        if direction == "haut":                                     #haut
-            dx = -1
-        elif direction == "bas":                                    #bas
-            dx = 1
-        elif direction == "gauche":                                 #gauche
-            dy = -1
-        elif direction == "droite":                                 #droite
+        # Vérifier que la direction correspond à l'orientation
+        if voiture.orientation == "H" and direction not in ("D", "G"):
+            return False
+        if voiture.orientation == "V" and direction not in ("H", "B"):
+            return False
+        dx, dy = 0, 0
+        if direction == "D":
             dy = 1
-        else:
-            print("Direction invalide.")                            #pour l erreur
-            return
-
+        elif direction == "G":
+            dy = -1
+        elif direction == "B":
+            dx = 1
+        elif direction == "H":
+            dx = -1
+        anciennes_cases = voiture.cases()
         nouvelles_cases = [
             (x + dx, y + dy)
-            for x, y in voiture.cases()
+            for x, y in anciennes_cases
         ]
-        anciennes_cases = set(voiture.cases())                      # crée une collection non ordonnée
-                                                                                            # Vérifier les obstacles et les limites
         for x, y in nouvelles_cases:
             if not (0 <= x < 6 and 0 <= y < 6):
-                print("Déplacement impossible : limite du plateau.")
-                return
-
-            if self.plateau[x][y] != ". " and (x, y) not in anciennes_cases:
-                print("Déplacement impossible : voiture bloquée.")
-                return
-
-        # Effectuer le déplacement
+                return False
+            if (x, y) not in anciennes_cases:
+                if self.plateau[x][y] != ". ":
+                    return False
         voiture.x += dx
         voiture.y += dy
 
-        # Actualiser le plateau
         self.actualiser_plateau()
-
-        print("Déplacement effectué !")
-
+        return True
 
     def getState(self):
         return self.state
@@ -114,20 +99,15 @@ class Plateau:
             print("bien joué vous avez passé le niveau !")
             self.state = "w"
     def actualiser_plateau(self):
-        """Reconstruit le plateau à partir des voitures."""
-
-        # On vide le plateau
         self.plateau = [
             [". " for _ in range(6)]
             for _ in range(6)
         ]
 
-        # On replace toutes les voitures
         for voiture in self.voitures:
             for x, y in voiture.cases():
-
                 if 0 <= x < 6 and 0 <= y < 6:
-                    self.plateau[x][y] = voiture
+                    self.plateau[x][y] = voiture.couleur + " "
     
     
     def convertir_en_voitures(self):
