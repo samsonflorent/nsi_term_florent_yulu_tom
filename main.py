@@ -72,6 +72,10 @@ def play_game(p):
 
         if p.mouvementdevoiture(vehicule_selectionne,direction,nDistance):
             print("Déplacement réussi !")
+            if userColorChoiceInput == "R" and userCarChoiceInput == "v":
+                if p.sortie(vehicule_selectionne) == True:
+                    print(f"Bravo tu as gagné le niveau {n}")
+                    break
         else:
             print("Déplacement impossible !")
 
