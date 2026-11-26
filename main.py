@@ -54,24 +54,16 @@ def play_game(p):
 
         direction = input(
             "Dans quelle direction voulez-vous le déplacer "
-            "(haut, bas, gauche, droite) ? "
-        ).lower()
-
-        directions = {
-            "droite": "D",
-            "gauche": "G",
-            "bas": "B",
-            "haut": "H"
-        }
-
+            "(haut:H, bas:B, gauche:G, droite:D) ? "
+        ).upper()
+        
+        directions = ["D","G","H","B"]
+        
         if direction not in directions:
             print("Direction invalide.")
             continue
 
-        if p.mouvementdevoiture(
-            vehicule_selectionne,
-            directions[direction]
-        ):
+        if p.mouvementdevoiture(vehicule_selectionne,direction):
             print("Déplacement réussi !")
         else:
             print("Déplacement impossible !")
@@ -87,8 +79,15 @@ def main():
                 input("Appuyez sur Entrée pour revenir...")
         elif choice == "2":
             print("Sélection du niveau")
-            n = int(input("Quel niveau voulez-vous : "))
-            p = charger_niveau(n)
+            vtemp = False
+            while not(vtemp):
+                n = (input("Quel niveau voulez-vous : "))
+                if n.isdigit():
+                    if 0<int(n) and int(n)<=40:
+                        vtemp = True
+                        continue
+                print("Utilise un entier stp entre 1 et 40")
+            p = charger_niveau(int(n))
             if p is not None:
                 play_game(p)
         elif choice == "3":
