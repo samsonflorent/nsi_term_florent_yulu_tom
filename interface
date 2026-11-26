@@ -1,3 +1,4 @@
+from main import play_game, charger_niveau
 import tkinter as tk
 
 fenetre = tk.Tk()
@@ -44,16 +45,15 @@ def bouton_niveau():
     )
     titre.pack(pady=20)
 
-
     cadre = tk.Frame(nouvelle_fenetre, bg="#202B3C")
     cadre.pack(pady=10)
 
     def choisir(n):
-        print("Tu as choisi le niveau", n)
+        p = charger_niveau(n)
 
-        resultat.config(
-            text="Niveau " + str(n) + " sélectionné !"
-        )
+        if p is not None:
+            nouvelle_fenetre.destroy()
+            play_game(p)
 
     for i in range(1, 41):
 
@@ -75,26 +75,15 @@ def bouton_niveau():
             pady=6
         )
 
-    resultat = tk.Label(
-        nouvelle_fenetre,
-        text="Aucun niveau sélectionné",
-        font=("Arial", 14, "bold"),
-        bg="#202B3C",
-        fg="#06D6A0"
-    )
-    resultat.pack(pady=20)
-
 
 
 def bouton_quitter():
     fenetre.destroy()
 
-
-
 bouton = tk.Button(
     fenetre,
     text="▶ JOUER",
-    command=bouton_jouer,
+    command=lambda: play_game(charger_niveau(1)),
     bg="#FFD166",
     fg="black",
     font=("Arial", 12, "bold"),
