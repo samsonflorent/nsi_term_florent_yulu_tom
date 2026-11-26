@@ -1,5 +1,4 @@
 import plateau
-import vehicule
 
 def display_menu():
     print("""
@@ -62,8 +61,16 @@ def play_game(p):
         if direction not in directions:
             print("Direction invalide.")
             continue
+        nDistance = 0
+        while nDistance == 0 :
+            ReponseNDistance = input("De combien de cases deplacer le véhicule : ")
+            if ReponseNDistance.isdigit():
+                nDistance = int(ReponseNDistance)
+                continue
+            else:
+                print("Prend un nombre stp")
 
-        if p.mouvementdevoiture(vehicule_selectionne,direction):
+        if p.mouvementdevoiture(vehicule_selectionne,direction,nDistance):
             print("Déplacement réussi !")
         else:
             print("Déplacement impossible !")
@@ -91,13 +98,12 @@ def main():
             if p is not None:
                 play_game(p)
         elif choice == "3":
-            print("Déplacez les véhicules pour libérer X.")
+            print("Déplacez les véhicules pour libérer la voiture rouge.")
         elif choice == "4":
             print("Au revoir !")
-            break
+            exit()
         else:
             print("Choix invalide.")
-
 
 
 def charger_niveau(numero):

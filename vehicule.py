@@ -1,4 +1,3 @@
-
 class Vehicule:
     def __init__(self, taille, orientation, x, y, couleur):
         self.taille = taille
@@ -18,9 +17,9 @@ class Vehicule:
                 resultat.append((self.x + i, self.y))
 
         return resultat
-        
-    def deplacer(self, direction):
-        """Déplace la voiture d'une case."""
+
+    def afficher(self):
+        return f"Vehicule({self.taille}, {self.orientation}, {self.x}, {self.y})"
         
         if self.orientation == "H":
             if direction == "droite":

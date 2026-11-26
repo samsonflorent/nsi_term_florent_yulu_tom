@@ -56,7 +56,7 @@ class Plateau:
         return (voiture.x, voiture.y)
 
     
-    def mouvementdevoiture(self, voiture, direction):
+    def mouvementdevoiture(self, voiture, direction, distance : int):
 
         # Vérifier que la direction correspond à l'orientation
         if voiture.orientation == "H" and direction not in ("D", "G"):
@@ -65,13 +65,13 @@ class Plateau:
             return False
         dx, dy = 0, 0
         if direction == "D":
-            dy = 1
+            dy = distance
         elif direction == "G":
-            dy = -1
+            dy = -distance
         elif direction == "B":
-            dx = 1
+            dx = distance
         elif direction == "H":
-            dx = -1
+            dx = -distance
         anciennes_cases = voiture.cases()
         nouvelles_cases = [
             (x + dx, y + dy)
