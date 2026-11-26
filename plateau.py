@@ -169,3 +169,14 @@ class Plateau:
             )
 
             self.voitures.append(voiture)
+            
+            
+    def sortie(self, voiture):
+        if voiture.couleur[0] == "R":
+            if voiture.orientation == "D":
+                if voiture.y + voiture.taille == 7:
+                    self.suppvoiture(voiture)
+                    self.state = "w"
+                    return True
+        return False
+
